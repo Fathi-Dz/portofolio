@@ -1,15 +1,37 @@
 import { useEffect, useRef } from "react";
+import { motion, useMotionValue, useTransform } from "framer-motion";
 import imgHero from "../../assets/asset/Hero/hero.png";
 import "./Hero.css";
 
 const Hero = () => {
   const introRef = useRef(null);
   const heroRef = useRef(null);
-  const imgRef = useRef(null);
+
+  // PARALLAX VALUES
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+
+  const rotateX = useTransform(y, [-20, 20], [10, -10]);
+  const rotateY = useTransform(x, [-20, 20], [-10, 10]);
+
+  const handleMouseMove = (e) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const offsetX = e.clientX - (rect.left + rect.width / 2);
+    const offsetY = e.clientY - (rect.top + rect.height / 2);
+
+    x.set(offsetX * 0.1);
+    y.set(offsetY * 0.1);
+  };
+
+  const handleMouseLeave = () => {
+    x.set(0);
+    y.set(0);
+  };
 
   /* -------------------------
-        INTRO ANIMATION
+        INTRO ANIMATION (SAMA)
   ------------------------- */
+
   useEffect(() => {
     const intro = introRef.current;
     const hero = heroRef.current;
@@ -38,30 +60,9 @@ const Hero = () => {
     };
   }, []);
 
-  /* -------------------------
-        PARALLAX HOVER
-  ------------------------- */
-  const handleMouseMove = (e) => {
-    const img = imgRef.current;
-    if (!img) return;
-
-    const rect = img.getBoundingClientRect();
-    const x = (e.clientX - rect.left - rect.width / 2) * 0.03;
-    const y = (e.clientY - rect.top - rect.height / 2) * 0.03;
-
-    img.style.transform = `translate(${x}px, ${y}px) scale(1.03)`;
-  };
-
-  const handleMouseLeave = () => {
-    const img = imgRef.current;
-    if (!img) return;
-
-    img.style.transform = "translate(0,0) scale(1)";
-  };
-
   return (
     <>
-      {/* INTRO SCREEN */}
+      {/* INTRO SAMA */}
       <div
         id="intro"
         ref={introRef}
@@ -102,11 +103,17 @@ const Hero = () => {
           overflow-hidden opacity-0 transition-all duration-[2000ms]
         "
       >
-        <img
-          ref={imgRef}
+        <motion.img
           src={imgHero}
           alt="Hero"
-          className="w-full max-w-[530px] transition-transform duration-300 ease-out relative z-10"
+          style={{
+            x,
+            y,
+            rotateX,
+            rotateY,
+          }}
+          transition={{ type: "spring", stiffness: 150, damping: 20 }}
+          className="w-full max-w-[530px] relative z-10"
         />
 
         <div className="absolute inset-0 bg-black/40"></div>

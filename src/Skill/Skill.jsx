@@ -4,41 +4,42 @@ import { SiTailwindcss } from "react-icons/si";
 
 export default function SkillSection() {
   const skills = [
-    { name: "HTML", icon: Icons.FaHtml5 },
-    { name: "CSS", icon: Icons.FaCss3Alt },
-    { name: "Javascript", icon: Icons.FaJs },
-    { name: "React", icon: Icons.FaReact },
-    { name: "Tailwind", icon: SiTailwindcss },
-    { name: "Figma", icon: Icons.FaFigma },
+    {  icon: Icons.FaHtml5 },
+    {  icon: Icons.FaCss3Alt },
+    { icon: Icons.FaJs },
+    {  icon: Icons.FaReact },
+    {  icon: SiTailwindcss },
+    { icon: Icons.FaFigma },
   ];
 
-  const looped = [...skills, ...skills];
+  const looped = [...skills, ...skills, ...skills];
 
   return (
-    <section className="relative w-full py-20 overflow-hidden bg-secondary">
-
-      {/* ===== BIG BACKGROUND TEXT ===== */}
+    <section className="relative w-full bg-secondary py-20 overflow-hidden">
+      {/* === BACKGROUND TEXT === */}
       <h1
         className="
-          absolute top-0 left-0 w-full 
-          text-[18vw] sm:text-[14vw] md:text-[10vw] 
-          font-black text-primary 
-          opacity-10 tracking-tight 
-          px-10 select-none pointer-events-none
+          absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2
+          font-hanson
+          text-[20vw] md:text-[18vw] 
+          text-[var(--color-secondary)]
+          opacity-20 
+          tracking-widest
+          whitespace-nowrap
+          pointer-events-none
+          select-none
         "
-        style={{ lineHeight: 0.9 }}
       >
         SKILLS
       </h1>
 
-      {/* ===== MARQUEE ===== */}
-      <div className="mt-[25vw] sm:mt-[18vw] md:mt-[12vw] overflow-hidden whitespace-nowrap w-full">
-
+      {/* === MARQUEE === */}
+      <div className="relative z-10 mt-16 overflow-hidden whitespace-nowrap w-full">
         <motion.div
           className="flex gap-20 items-center"
           animate={{ x: ["0%", "-50%"] }}
           transition={{
-            duration: 10, 
+            duration: 10,
             ease: "linear",
             repeat: Infinity,
           }}
@@ -48,12 +49,11 @@ export default function SkillSection() {
             return (
               <div
                 key={i}
-                className="flex flex-col items-center text-primary"
+                className="flex flex-col items-center text-secondary"
               >
-                <Icon className="text-6xl md:text-7xl" />
-                <p className="mt-3 text-lg md:text-xl font-bold">
-                  {skill.name}
-                </p>
+                <Icon className="text-6xl" style={{ color: "var(--color-secondary)" }} />
+
+                <p className="mt-3 text-lg font-bold">{skill.name}</p>
               </div>
             );
           })}

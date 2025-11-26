@@ -5,26 +5,23 @@ export default function AboutSection() {
         relative w-full min-h-screen 
         px-8 md:px-20 py-20 
         flex flex-col md:flex-row items-center gap-16
-        overflow-hidden
+        overflow-hidden bg-[var(--color-primary)]
       "
-      style={{
-        background: '#f4f4f4 url("https://grainy-gradients.vercel.app/noise.svg")'
-      }}
     >
 
       {/* LEFT TEXT */}
       <div className="w-full md:w-1/2 z-20">
-        <h2 className="text-3xl md:text-5xl font-black mb-6 tracking-tight">
+        <h2 className="text-3xl md:text-5xl font-black mb-6 tracking-tight  text-[var(--color-secondary)]">
           Fathi Dzahabi
         </h2>
 
-        <p className="text-[15px] md:text-[18px] leading-relaxed font-medium max-w-[520px]">
+        <p className="text-[15px] md:text-[18px] leading-relaxed font-medium max-w-[520px] text-[var(--color-secondary)]">
           Hello! I’m Beje, a passionate frontend designer & creative developer.
           I love building clean, modern, and aesthetic user interfaces with smooth
           animation and meaningful layouts.
         </p>
 
-        <p className="mt-4 text-[15px] md:text-[18px] leading-relaxed font-medium max-w-[520px]">
+        <p className="mt-4 text-[15px] md:text-[18px] leading-relaxed font-medium max-w-[520px] text-[var(--color-secondary)]">
           My focus is designing digital experiences that feel premium, expressive,
           and visually unique — blending minimalism, bold typography, and motion.
         </p>

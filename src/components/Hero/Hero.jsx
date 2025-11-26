@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 import { motion, useMotionValue, useTransform } from "framer-motion";
-import imgHero from "../../assets/asset/Hero/hero.png";
+import imgHero from "../../assets/Hero/hero.png";
 import "./Hero.css";
 
 const Hero = () => {

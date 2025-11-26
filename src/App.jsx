@@ -4,6 +4,7 @@ import Hero from './components/Hero/Hero.jsx'
 import Urutan from './components/Urutan/Urutan.jsx'
 import About from './components/About/About.jsx'
 import Skill from './Skill/Skill.jsx'
+import Projects from './components/Projects/Projects.jsx'
 
 function App() {
    useEffect(() => {
@@ -25,8 +26,9 @@ const lenis = new Lenis({
     <>
       <Hero />
       <Urutan />
-      <About />
       <Skill />
+      <About />
+      <Projects />
     </>
   )
 }

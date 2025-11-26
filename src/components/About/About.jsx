@@ -15,13 +15,13 @@ export default function AboutSection() {
           Fathi Dzahabi
         </h2>
 
-        <p className="text-[15px] md:text-[18px] leading-relaxed font-medium max-w-[520px] text-[var(--color-secondary)]">
+        <p className="text-[15px] md:text-[18px] leading-relaxed font-medium max-w-[520px] text-[var(--color-accent)]">
           Hello! I’m Beje, a passionate frontend designer & creative developer.
           I love building clean, modern, and aesthetic user interfaces with smooth
           animation and meaningful layouts.
         </p>
 
-        <p className="mt-4 text-[15px] md:text-[18px] leading-relaxed font-medium max-w-[520px] text-[var(--color-secondary)]">
+        <p className="mt-4 text-[15px] md:text-[18px] leading-relaxed font-medium max-w-[520px] text-[var(--color-accent)]">
           My focus is designing digital experiences that feel premium, expressive,
           and visually unique — blending minimalism, bold typography, and motion.
         </p>
@@ -46,6 +46,7 @@ export default function AboutSection() {
           sm:text-[110px]    /* tablet */
           md:text-[160px]    /* desktop */
           lg:text-[190px]
+          text-[var(--color-accent)]
         "
       >
         about me

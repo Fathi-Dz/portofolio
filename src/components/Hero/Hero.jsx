@@ -1,13 +1,16 @@
 import { useEffect, useRef } from "react";
 import { motion, useMotionValue, useTransform } from "framer-motion";
+import gsap from "gsap";
 import imgHero from "../../assets/asset/Hero/hero.png";
 import "./Hero.css";
 
 const Hero = () => {
   const introRef = useRef(null);
   const heroRef = useRef(null);
+  const textRef = useRef(null);
+  const lightRef = useRef(null);
 
-  // PARALLAX VALUES
+  // PARALLAX ----------------------------------------------------
   const x = useMotionValue(0);
   const y = useMotionValue(0);
 
@@ -28,71 +31,104 @@ const Hero = () => {
     y.set(0);
   };
 
-  /* -------------------------
-        INTRO (SAMA)
-  ------------------------- */
+  // INTRO GSAP ---------------------------------------------------
   useEffect(() => {
     const intro = introRef.current;
     const hero = heroRef.current;
+    const text = textRef.current;
+    const light = lightRef.current;
 
-    document.body.style.overflow = "hidden";
+    const tl = gsap.timeline({
+      defaults: { ease: "power4.out", duration: 1 },
+    });
 
-    const t1 = setTimeout(() => {
-      intro.classList.add("intro-reveal");
+    // Split reveal mask
+    tl.fromTo(
+      intro,
+      { clipPath: "inset(0 0 100% 0)" },
+      { clipPath: "inset(0 0 0% 0)", duration: 1.3 }
+    );
 
-      const t2 = setTimeout(() => {
-        intro.style.display = "none";
-        hero.classList.remove("opacity-0");
+    // Glitch scale pop
+    tl.fromTo(
+      text,
+      { opacity: 0, scale: 0.7, filter: "blur(20px)" },
+      { opacity: 1, scale: 1, filter: "blur(0px)", duration: 1 },
+      "-=0.6"
+    );
 
-        document.body.style.overflow = "auto";
-      }, 2300);
+    // Light sweep
+    tl.fromTo(
+      light,
+      { x: "-150%" },
+      { x: "150%", duration: 1.2 },
+      "-=1"
+    );
 
-      intro._t2 = t2;
-    }, 2500);
+    // Whole intro fades out
+    tl.to(intro, {
+      opacity: 0,
+      pointerEvents: "none",
+      duration: 0.9,
+      delay: 0.7,
+    });
 
-    intro._t1 = t1;
-
-    return () => {
-      if (intro._t1) clearTimeout(intro._t1);
-      if (intro._t2) clearTimeout(intro._t2);
-      document.body.style.overflow = "auto";
-    };
+    // Hero section appears
+    tl.to(
+      hero,
+      {
+        opacity: 1,
+        filter: "blur(0px)",
+        duration: 1.2,
+      },
+      "-=0.5"
+    );
   }, []);
 
   return (
     <>
       {/* INTRO */}
       <div
-        id="intro"
         ref={introRef}
         className="
-          fixed inset-0 flex flex-col justify-center items-center
-          bg-[var(--color-secondary)] text-[var(--color-primary)]
-          z-[9999] font-[var(--font-bebas)]
+          fixed inset-0 z-[9999]
+          bg-[var(--color-secondary)]
+          flex items-center justify-center
+          overflow-hidden
         "
       >
-        <h1
+        {/* LIGHT SWEEP */}
+        <div
+          ref={lightRef}
           className="
-            text-4xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl
-            font-bold tracking-[4px] fade-in-slow
+            absolute top-0 left-0 w-[40%] h-full
+            bg-gradient-to-r from-transparent via-white/40 to-transparent
+            blur-3xl opacity-40
           "
-        >
-          sabar dulu napa
-        </h1>
+        ></div>
 
-        <p
+        {/* GLITCH TEXT */}
+        <h1
+          ref={textRef}
           className="
-            mt-3 text-sm md:text-base
-            tracking-[3px] fade-in-slow delay-300
+            text-[11vw] sm:text-[9vw] md:text-[7vw] lg:text-[6vw]
+            font-[var(--font-bebas)]
+            text-[var(--color-primary)]
+            tracking-widest select-none
           "
+          style={{
+            textShadow: `
+              0 0 20px rgba(255,255,255,0.3),
+              0 0 40px rgba(255,255,255,0.15)
+            `,
+          }}
         >
-          loading...
-        </p>
+          WELCOME
+        </h1>
       </div>
 
       {/* HERO */}
       <section
-        id="home"
         ref={heroRef}
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
@@ -100,28 +136,24 @@ const Hero = () => {
           relative min-h-screen w-full
           flex justify-center items-center
           px-4 sm:px-6 md:px-10
-          overflow-hidden opacity-0 transition-all duration-[2000ms]
+          overflow-hidden opacity-0
+          transition-all duration-[1500ms]
         "
+        style={{ filter: "blur(20px)" }}
       >
         <motion.img
           src={imgHero}
           alt="Hero"
-          style={{
-            x,
-            y,
-            rotateX,
-            rotateY,
-          }}
+          style={{ x, y, rotateX, rotateY }}
           transition={{ type: "spring", stiffness: 150, damping: 20 }}
           className="
             w-[80%] sm:w-[70%] md:w-[55%] lg:w-[45%] xl:w-[40%]
-            max-w-[650px]
-            object-contain z-10
+            max-w-[650px] object-contain z-10
           "
         />
 
-        {/* Overlay */}
-        <div className="absolute inset-0 bg-black/40"></div>
+        {/* OVERLAY */}
+        <div className="absolute inset-0 bg-black/40" />
       </section>
     </>
   );

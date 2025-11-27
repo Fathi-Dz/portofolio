@@ -1,86 +1,71 @@
 import { motion } from "framer-motion";
-import p1 from "../../assets/asset/Projects/project.jpg";
+import projectData from "../../assets/data/project/project.json";
 
 export default function ProjectSection() {
-  const projects = [
-    { title: "Chat App", img: {p1}, side: "left" },
-    { title: "Portfolio", img: "../../assets/asset/Projects/project.jpg", side: "right" },
-    { title: "Store App", img: "/t3.jpg", side: "left" },
-  ];
-
   return (
-<section className="relative w-full bg-[var(--color-secondary)] py-20 px-6">
+    <section className="relative w-full bg-[var(--color-secondary)] py-20 px-6">
 
-{/* LEFT SIDE VERTICAL TITLE */}
-<h1
-  className="
-    absolute 
-    left-[-2vw] top-132
-    -translate-y-1/2 -translate-x-[40%]
-    text-[16vw] md:text-[10vw]
-    font-bold
-    text-primary/10
-    rotate-90
-    whitespace-nowrap
-    pointer-events-none
-    select-none
-    tracking-widest
-
-    md:left-[-2vw]
-    md:text-[11vw]
-
-    /* MOBILE */
-    sm:left-[-10vw]
-    sm:text-[22vw]
-  "
->
-  PROJECTS
-</h1>
-
-
-
-  {/* LIST PROJECT */}
-  <div className="max-w-4xl mx-auto space-y-20 relative z-10">
-    {projects.map((p, i) => (
-      <motion.div
-        key={i}
-        initial={{ opacity: 0, x: p.side === "left" ? -120 : 120 }}
-        whileInView={{ opacity: 1, x: 0 }}
-        transition={{ duration: 0.8 }}
-        viewport={{ once: true }}
-        className={`
-          flex items-center gap-8
-          ${p.side === "right" ? "flex-row-reverse" : ""}
-        `}
+      {/* LEFT SIDE TITLE */}
+      <h1
+        className="
+          absolute 
+          left-[-2vw] top-135
+          -translate-y-1/2 -translate-x-[40%]
+          text-[16vw] md:text-[7vw]
+          font-bold
+          text-primary/10
+          rotate-90
+          whitespace-nowrap
+          pointer-events-none
+          select-none
+          tracking-widest
+          md:left-[-3vw]
+        
+          sm:left-[-10vw]
+          sm:text-[22vw]
+        "
       >
-        {/* IMAGE */}
-        <motion.img
-          src={p.img}
-          whileHover={{ scale: 1.05, rotateX: 10, rotateY: -10 }}
-          transition={{ type: "spring", stiffness: 200, damping: 10 }}
-          className="w-1/2 h-60 object-cover rounded-xl shadow-xl"
-        />
+        PROJECTS
+      </h1>
 
-        {/* TITLE */}
-        <motion.div
-          whileHover={{ scale: 1.05 }}
-          transition={{ type: "spring", stiffness: 200, damping: 10 }}
-          className="
-            text-[var(--color-primary)]
-            font-bold
-            text-3xl md:text-4xl
-            tracking-wide
-            drop-shadow-[0_0_8px_rgba(0,0,0,0.3)]
-            bg-gradient-to-r from-[var(--color-primary)]/70 to-[var(--color-primary)]/30
-            bg-clip-text text-transparent
-            transition-all duration-300
-          "
-        >
-          {p.title}
-        </motion.div>
-      </motion.div>
-    ))}
-  </div>
-</section>
+      {/* LIST PROJECTS */}
+      <div className="max-w-4xl mx-auto space-y-20 relative z-10">
+        {projectData.map((p, i) => (
+          <motion.div
+            key={i}
+            initial={{ opacity: 0, x: p.side === "left" ? -120 : 120 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+            className={`flex items-center gap-8 ${
+              p.side === "right" ? "flex-row-reverse" : ""
+            }`}
+          >
+            {/* IMAGE */}
+            <motion.img
+              src={p.img}
+              whileHover={{ scale: 1.05, rotateX: 10, rotateY: -10 }}
+              transition={{ type: "spring", stiffness: 200, damping: 10 }}
+              className="w-1/2 h-60 object-cover rounded-xl shadow-xl"
+            />
+
+            {/* TITLE */}
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              transition={{ type: "spring", stiffness: 200, damping: 10 }}
+              className="
+                text-[var(--color-primary)]
+                font-bold text-3xl md:text-4xl
+                tracking-wide
+                bg-gradient-to-r from-[var(--color-primary)]/70 to-[var(--color-primary)]/30
+                bg-clip-text text-transparent
+              "
+            >
+              {p.title}
+            </motion.div>
+          </motion.div>
+        ))}
+      </div>
+    </section>
   );
 }

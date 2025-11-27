@@ -1,16 +1,18 @@
 import { motion } from "framer-motion";
-import * as Icons from "react-icons/fa";
-import { SiTailwindcss } from "react-icons/si";
+import * as FaIcons from "react-icons/fa";
+import * as SiIcons from "react-icons/si";
+import skillsData from "../assets/data/Skill/skill.json"; 
 
 export default function SkillSection() {
-  const skills = [
-    {  icon: Icons.FaHtml5 },
-    {  icon: Icons.FaCss3Alt },
-    { icon: Icons.FaJs },
-    {  icon: Icons.FaReact },
-    {  icon: SiTailwindcss },
-    { icon: Icons.FaFigma },
-  ];
+  // Convert nama icon dari JSON → actual component react-icons
+  const skills = skillsData.map((item) => {
+    const Icon =
+      FaIcons[item.icon] ||
+      SiIcons[item.icon] ||
+      (() => <div>?</div>); // fallback
+
+    return { ...item, Icon };
+  });
 
   const looped = [...skills, ...skills, ...skills];
 
@@ -34,7 +36,7 @@ export default function SkillSection() {
       </h1>
 
       {/* === MARQUEE === */}
-      <div className="relative z-10 mt-16 overflow-hidden whitespace-nowrap w-full">
+      <div className="relative z-10 mt-20 overflow-hidden whitespace-nowrap w-full">
         <motion.div
           className="flex gap-20 items-center"
           animate={{ x: ["0%", "-50%"] }}
@@ -44,19 +46,18 @@ export default function SkillSection() {
             repeat: Infinity,
           }}
         >
-          {looped.map((skill, i) => {
-            const Icon = skill.icon;
-            return (
-              <div
-                key={i}
-                className="flex flex-col items-center text-secondary"
-              >
-                <Icon className="text-6xl" style={{ color: "var(--color-secondary)" }} />
-
-                <p className="mt-3 text-lg font-bold">{skill.name}</p>
-              </div>
-            );
-          })}
+          {looped.map((s, i) => (
+            <div
+              key={i}
+              className="flex flex-col items-center text-secondary"
+            >
+              <s.Icon
+                className="text-6xl"
+                style={{ color: "var(--color-secondary)" }}
+              />
+              <p className="mt-3 text-lg font-bold">{s.name}</p>
+            </div>
+          ))}
         </motion.div>
       </div>
     </section>

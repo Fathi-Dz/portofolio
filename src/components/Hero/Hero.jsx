@@ -2,28 +2,28 @@ import { useEffect, useRef } from "react";
 import { motion, useMotionValue, useTransform } from "framer-motion";
 import gsap from "gsap";
 import imgHero from "../../assets/asset/Hero/hero.png";
-import "./Hero.css";
+import "../Hero/Hero.css";
 
 const Hero = () => {
-  const introRef = useRef(null);
   const heroRef = useRef(null);
+  const introRef = useRef(null);
   const textRef = useRef(null);
-  const lightRef = useRef(null);
 
-  // PARALLAX ----------------------------------------------------
+  const panel1 = useRef(null);
+  const panel2 = useRef(null);
+  const panel3 = useRef(null);
+  const panel4 = useRef(null);
+
+  // PARALLAX
   const x = useMotionValue(0);
   const y = useMotionValue(0);
-
   const rotateX = useTransform(y, [-30, 30], [10, -10]);
   const rotateY = useTransform(x, [-30, 30], [-10, 10]);
 
   const handleMouseMove = (e) => {
     const rect = e.currentTarget.getBoundingClientRect();
-    const offsetX = e.clientX - (rect.left + rect.width / 2);
-    const offsetY = e.clientY - (rect.top + rect.height / 2);
-
-    x.set(offsetX * 0.08);
-    y.set(offsetY * 0.08);
+    x.set((e.clientX - (rect.left + rect.width / 2)) * 0.08);
+    y.set((e.clientY - (rect.top + rect.height / 2)) * 0.08);
   };
 
   const handleMouseLeave = () => {
@@ -31,97 +31,89 @@ const Hero = () => {
     y.set(0);
   };
 
-  // INTRO GSAP ---------------------------------------------------
+  // INTRO ANIMATION
   useEffect(() => {
     const intro = introRef.current;
-    const hero = heroRef.current;
-    const text = textRef.current;
-    const light = lightRef.current;
 
     const tl = gsap.timeline({
-      defaults: { ease: "power4.out", duration: 1 },
+      defaults: { ease: "power3.out" }
     });
 
-    // Split reveal mask
+    // PANEL MASUK
     tl.fromTo(
-      intro,
-      { clipPath: "inset(0 0 100% 0)" },
-      { clipPath: "inset(0 0 0% 0)", duration: 1.3 }
+      [panel1.current, panel2.current, panel3.current, panel4.current],
+      {
+        xPercent: (i) => (i % 2 === 0 ? -100 : 100),
+        yPercent: (i) => (i < 2 ? -100 : 100),
+        opacity: 0
+      },
+      {
+        xPercent: 0,
+        yPercent: 0,
+        opacity: 1,
+        duration: 1.1,
+        stagger: 0.08
+      }
     );
 
-    // Glitch scale pop
+    // TEXT MUNCUL — super clean
     tl.fromTo(
-      text,
-      { opacity: 0, scale: 0.7, filter: "blur(20px)" },
-      { opacity: 1, scale: 1, filter: "blur(0px)", duration: 1 },
-      "-=0.6"
+      textRef.current,
+      { opacity: 0, y: 40, letterSpacing: "8px" },
+      { opacity: 1, y: 0, letterSpacing: "2px", duration: 0.9 },
+      "-=0.5"
     );
 
-    // Light sweep
-    tl.fromTo(
-      light,
-      { x: "-150%" },
-      { x: "150%", duration: 1.2 },
-      "-=1"
+    // PANEL CUT OUT (premium banget)
+    tl.to(
+      [panel1.current, panel2.current, panel3.current, panel4.current],
+      {
+        xPercent: (i) => (i % 2 === 0 ? -150 : 150),
+        opacity: 0,
+        duration: 1,
+        stagger: 0.1
+      }
     );
 
-    // Whole intro fades out
+    // INTRO FADE AWAY
     tl.to(intro, {
       opacity: 0,
       pointerEvents: "none",
-      duration: 0.9,
-      delay: 0.7,
+      duration: 0.5
     });
 
-    // Hero section appears
+    // HERO MUNCUL
     tl.to(
-      hero,
-      {
-        opacity: 1,
-        filter: "blur(0px)",
-        duration: 1.2,
-      },
-      "-=0.5"
+      heroRef.current,
+      { opacity: 1, filter: "blur(0px)", duration: 1.2 },
+      "-=0.3"
     );
   }, []);
 
   return (
     <>
-      {/* INTRO */}
+      {/* INTRO – CLEANEST VERSION */}
       <div
         ref={introRef}
         className="
-          fixed inset-0 z-[9999]
-          bg-[var(--color-secondary)]
-          flex items-center justify-center
-          overflow-hidden
+          fixed inset-0 z-[9999] overflow-hidden
+          bg-black flex items-center justify-center
         "
       >
-        {/* LIGHT SWEEP */}
-        <div
-          ref={lightRef}
-          className="
-            absolute top-0 left-0 w-[40%] h-full
-            bg-gradient-to-r from-transparent via-white/40 to-transparent
-            blur-3xl opacity-40
-          "
-        ></div>
+        {/* 4 PANEL */}
+        <div ref={panel1} className="intro-panel bg-neutral-900"></div>
+        <div ref={panel2} className="intro-panel bg-neutral-800"></div>
+        <div ref={panel3} className="intro-panel bg-neutral-900"></div>
+        <div ref={panel4} className="intro-panel bg-neutral-800"></div>
 
-        {/* GLITCH TEXT */}
+        {/* CLEAN TEXT */}
         <h1
           ref={textRef}
           className="
             text-[11vw] sm:text-[9vw] md:text-[7vw] lg:text-[6vw]
             font-[var(--font-bebas)]
-            text-[var(--color-primary)]
-            tracking-widest select-none
+            text-white tracking-[2px]
           "
-          style={{
-            textShadow: `
-              0 0 20px rgba(255,255,255,0.3),
-              0 0 40px rgba(255,255,255,0.15)
-            `,
-          }}
         >
           WELCOME
         </h1>
@@ -137,7 +129,6 @@ const Hero = () => {
           flex justify-center items-center
           px-4 sm:px-6 md:px-10
           overflow-hidden opacity-0
-          transition-all duration-[1500ms]
         "
         style={{ filter: "blur(20px)" }}
       >
@@ -152,7 +143,6 @@ const Hero = () => {
           "
         />
 
-        {/* OVERLAY */}
         <div className="absolute inset-0 bg-black/40" />
       </section>
     </>

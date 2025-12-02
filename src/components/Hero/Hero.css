@@ -1,0 +1,15 @@
+.intro-panel {
+  position: absolute;
+  inset: 0;
+  will-change: transform, opacity;
+}
+
+/* Minimal clean look — no glow, no neon */
+body, html {
+  overflow-x: hidden;
+}
+
+h1 {
+  font-weight: 900;
+  text-transform: uppercase;
+}

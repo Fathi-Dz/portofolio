@@ -9,7 +9,7 @@ export default function ProjectSection() {
       <h1
         className="
           absolute 
-          left-[-2vw] top-135
+          left-[-2vw] top-132
           -translate-y-1/2 -translate-x-[40%]
           text-[16vw] md:text-[7vw]
           font-bold

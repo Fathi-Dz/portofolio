@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import * as FaIcons from "react-icons/fa";
 import * as SiIcons from "react-icons/si";
-import skillsData from "../assets/data/Skill/skill.json"; 
+import skillsData from "../../assets/data/Skill/skill.json"; 
 
 export default function SkillSection() {
   // Convert nama icon dari JSON → actual component react-icons

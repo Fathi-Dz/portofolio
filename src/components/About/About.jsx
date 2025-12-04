@@ -1,7 +1,10 @@
 import { motion } from "framer-motion";
+import { useLang } from "../../Language/Language"; // <-- pakai bahasa
 import aboutData from "../../assets/data/About/about.json";
 
 export default function AboutSection() {
+  const { t } = useLang();
+
   return (
     <section
       className="
@@ -18,16 +21,16 @@ export default function AboutSection() {
 
         {/* TITLE */}
         <motion.h2
-          initial={{ opacity: 0, x: -60, filter: "blur(5px)" }}
-          whileInView={{ opacity: 1, x: 0, filter: "blur(0px)" }}
-          transition={{ duration: 0.9, ease: "easeOut" }}
+          initial={{ opacity: 0, x: -60, filter: 'blur(5px)' }}
+          whileInView={{ opacity: 1, x: 0, filter: 'blur(0px)' }}
+          transition={{ duration: 0.9, ease: 'easeOut' }}
           viewport={{ once: true }}
           className="
             text-4xl md:text-6xl font-black 
             tracking-tight text-[var(--color-secondary)]
           "
         >
-          {aboutData.name}
+          {t(aboutData.name.id, aboutData.name.en)}
         </motion.h2>
 
         {/* LINE ANIMATION */}
@@ -42,7 +45,7 @@ export default function AboutSection() {
         <motion.p
           initial={{ opacity: 0, x: 40 }}
           whileInView={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.9, ease: "easeOut", delay: 0.1 }}
+          transition={{ duration: 0.9, ease: 'easeOut', delay: 0.1 }}
           viewport={{ once: true }}
           className="
             text-[15px] md:text-[18px] leading-relaxed 
@@ -50,14 +53,14 @@ export default function AboutSection() {
             text-[var(--color-accent)] font-poppins
           "
         >
-          {aboutData.desc1}
+          {t(aboutData.desc1.id, aboutData.desc1.en)}
         </motion.p>
 
         {/* DESC 2 */}
         <motion.p
           initial={{ opacity: 0, x: 60 }}
           whileInView={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.9, ease: "easeOut", delay: 0.2 }}
+          transition={{ duration: 0.9, ease: 'easeOut', delay: 0.2 }}
           viewport={{ once: true }}
           className="
             text-[15px] md:text-[18px] leading-relaxed 
@@ -65,7 +68,7 @@ export default function AboutSection() {
             text-[var(--color-accent)] font-poppins
           "
         >
-          {aboutData.desc2}
+          {t(aboutData.desc2.id, aboutData.desc2.en)}
         </motion.p>
 
       </div>
@@ -74,7 +77,7 @@ export default function AboutSection() {
       <motion.div
         initial={{ opacity: 0, y: 80 }}
         whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1.1, ease: "easeOut" }}
+        transition={{ duration: 1.1, ease: 'easeOut' }}
         viewport={{ once: true }}
         className="
           w-full md:w-1/2 flex justify-center
@@ -98,7 +101,7 @@ export default function AboutSection() {
       <motion.h1
         initial={{ opacity: 0, y: 80 }}
         whileInView={{ opacity: 0.1, y: 0 }}
-        transition={{ duration: 1.2, ease: "easeOut" }}
+        transition={{ duration: 1.2, ease: 'easeOut' }}
         viewport={{ once: true }}
         className="
           absolute bottom-0 left-0 

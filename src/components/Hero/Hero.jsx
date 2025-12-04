@@ -4,7 +4,11 @@ import gsap from "gsap";
 import imgHero from "../../assets/asset/Hero/hero.png";
 import "../Hero/Hero.css";
 
+import { useLang } from "../../Language/Language"; // ⬅️ ambil hook bahasa
+
 const Hero = () => {
+  const { lang, toggleLang } = useLang(); // ⬅️ pakai bahasa
+
   const heroRef = useRef(null);
   const introRef = useRef(null);
   const textRef = useRef(null);
@@ -39,7 +43,6 @@ const Hero = () => {
       defaults: { ease: "power3.out" }
     });
 
-    // PANEL MASUK
     tl.fromTo(
       [panel1.current, panel2.current, panel3.current, panel4.current],
       {
@@ -56,7 +59,6 @@ const Hero = () => {
       }
     );
 
-    // TEXT MUNCUL — super clean
     tl.fromTo(
       textRef.current,
       { opacity: 0, y: 40, letterSpacing: "8px" },
@@ -64,7 +66,6 @@ const Hero = () => {
       "-=0.5"
     );
 
-    // PANEL CUT OUT (premium banget)
     tl.to(
       [panel1.current, panel2.current, panel3.current, panel4.current],
       {
@@ -75,14 +76,12 @@ const Hero = () => {
       }
     );
 
-    // INTRO FADE AWAY
     tl.to(intro, {
       opacity: 0,
       pointerEvents: "none",
       duration: 0.5
     });
 
-    // HERO MUNCUL
     tl.to(
       heroRef.current,
       { opacity: 1, filter: "blur(0px)", duration: 1.2 },
@@ -92,7 +91,7 @@ const Hero = () => {
 
   return (
     <>
-      {/* INTRO – CLEANEST VERSION */}
+      {/* INTRO */}
       <div
         ref={introRef}
         className="
@@ -100,13 +99,11 @@ const Hero = () => {
           bg-black flex items-center justify-center
         "
       >
-        {/* 4 PANEL */}
         <div ref={panel1} className="intro-panel bg-neutral-900"></div>
         <div ref={panel2} className="intro-panel bg-neutral-800"></div>
         <div ref={panel3} className="intro-panel bg-neutral-900"></div>
         <div ref={panel4} className="intro-panel bg-neutral-800"></div>
 
-        {/* CLEAN TEXT */}
         <h1
           ref={textRef}
           className="
@@ -115,7 +112,7 @@ const Hero = () => {
             text-white tracking-[2px]
           "
         >
-          WELCOME
+          {lang === "id" ? "SELAMAT DATANG" : "WELCOME"}
         </h1>
       </div>
 
@@ -132,6 +129,54 @@ const Hero = () => {
         "
         style={{ filter: "blur(20px)" }}
       >
+        {/* 🔥 SWITCH BAHASA (POJOK KANAN ATAS) */}
+{/* Language Switch - Ultra Smooth */}
+<div className="absolute top-6 right-6 z-50">
+  <button
+    onClick={toggleLang}
+    className="
+      relative flex items-center w-[90px] h-[38px] 
+      bg-white/15 backdrop-blur-xl rounded-full 
+      border border-white/30 shadow-[0_4px_20px_rgba(255,255,255,0.25)]
+      transition-all duration-500 hover:bg-white/25
+    "
+  >
+    {/* Sliding Ball */}
+    <span
+      className={`
+        absolute w-[42px] h-[32px] bg-white rounded-full 
+        shadow-[0_2px_12px_rgba(0,0,0,0.25)]
+        transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)]
+        ${lang === "id" ? "left-1" : "left-[47px]"}
+      `}
+    />
+
+    {/* ID text */}
+    <span
+      className={`
+        w-1/2 text-center text-sm font-semibold 
+        transition-all duration-300
+        ${lang === "id" ? "text-gray-900" : "text-white/70"}
+      `}
+    >
+      ID
+    </span>
+
+    {/* EN text */}
+    <span
+      className={`
+        w-1/2 text-center text-sm font-semibold
+        transition-all duration-300
+        ${lang === "en" ? "text-gray-900" : "text-white/70"}
+      `}
+    >
+      EN
+    </span>
+  </button>
+</div>
+
+
+
         <motion.img
           src={imgHero}
           alt="Hero"

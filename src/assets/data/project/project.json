@@ -1,5 +1,26 @@
 [
-  { "title": "Chat App", "img": "../../../assets/asset/Projects/project.jpg", "side": "left" },
-  { "title": "Portfolio", "img": "/assets/asset/Projects/project1.jpg", "side": "right" },
-  { "title": "Store App", "img": "/assets/asset/Projects/project.jpg", "side": "left" }
+  {
+    "title": {
+      "id": "Aplikasi Chat",
+      "en": "Chat App"
+    },
+    "img": "project.jpg",
+    "side": "left"
+  },
+  {
+    "title": {
+      "id": "Website Portofolio",
+      "en": "Portfolio"
+    },
+    "img": "project1.jpg",
+    "side": "right"
+  },
+  {
+    "title": {
+      "id": "Aplikasi Toko",
+      "en": "Store App"
+    },
+    "img": "project.jpg",
+      "side": "left"
+  }
 ]

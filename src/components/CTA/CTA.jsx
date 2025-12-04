@@ -1,6 +1,7 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import emoji from "../../assets/asset/CTA/emoji.png";
+import { useLang } from "../../Language/Language";
 
 export default function ThankYouSection() {
   const ref = useRef(null);
@@ -8,6 +9,8 @@ export default function ThankYouSection() {
     margin: "-30% 0px -30% 0px",
     once: false,
   });
+
+  const { lang } = useLang(); // GET LANGUAGE
 
   return (
     <section
@@ -42,12 +45,14 @@ export default function ThankYouSection() {
           drop-shadow-[0_8px_20px_rgba(0,0,0,0.25)]
         "
       >
-        Thank You!
+        {lang === "id" ? "Terima Kasih!" : "Thank You!"}
       </h1>
 
       {/* SMALL TEXT */}
       <p className="mt-4 text-sm md:text-lg opacity-70 tracking-wider font-medium">
-        contact me for work and collaborations
+        {lang === "id"
+          ? "hubungi saya untuk kerja sama dan kolaborasi"
+          : "contact me for work and collaborations"}
       </p>
 
       {/* ===== FLIPPING EMOJI ===== */}
@@ -78,7 +83,7 @@ export default function ThankYouSection() {
           backdrop-blur-md font-normal font-poppins
         "
       >
-        connect with me
+        {lang === "id" ? "hubungi saya" : "connect with me"}
       </motion.button>
 
     </section>

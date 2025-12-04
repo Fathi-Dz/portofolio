@@ -1,7 +1,22 @@
 {
-  "name": "Fathi Dzahabi",
-  "role": "Frontend Designer & Creative Developer",
-  "desc1": "Hello! I’m Beje, a passionate frontend designer & creative developer. I love building clean, modern, and aesthetic user interfaces with smooth animation and meaningful layouts.",
-  "desc2": "My focus is designing digital experiences that feel premium, expressive, and visually unique — blending minimalism, bold typography, and motion.",
-  "image": "/assets/fathi.jpg"
+  "name": {
+    "id": "Fathi Dzahabi",
+    "en": "Fathi Dzahabi"
+  },
+
+  "role": {
+    "id": "Frontend Designer & Creative Developer",
+    "en": "Frontend Designer & Creative Developer"
+  },
+
+  "desc1": {
+    "id": "Halo! Saya Beje, seorang frontend designer & creative developer yang penuh passion. Saya suka membangun antarmuka modern, bersih, estetik dengan animasi halus dan layout yang bermakna.",
+    "en": "Hello! I’m Beje, a passionate frontend designer & creative developer. I love building clean, modern, and aesthetic user interfaces with smooth animation and meaningful layouts."
+  },
+
+  "desc2": {
+    "id": "Fokus saya adalah mendesain pengalaman digital yang terasa premium, ekspresif, dan visual yang unik — menggabungkan minimalisme, tipografi bold, dan motion.",
+    "en": "My focus is designing digital experiences that feel premium, expressive, and visually unique — blending minimalism, bold typography, and motion."
+  }
+
 }

@@ -1,9 +1,11 @@
 import { useEffect } from "react";
 import Lenis from "@studio-freight/lenis";
 
+import { LangProvider } from "./Language/Language.jsx"; // ⬅️ tambah ini
 
 import PageTransition from "./components/PageTransition/PageTransition.jsx";
 const TransitionWrapper = PageTransition;
+
 import Hero from "./components/Hero/Hero.jsx";
 import Urutan from "./components/Urutan/Urutan.jsx";
 import Skill from "./components/Skill/Skill.jsx";
@@ -29,14 +31,15 @@ function App() {
 
   return (
     <>
-<Hero />
-<TransitionWrapper><Urutan /></TransitionWrapper>
-<TransitionWrapper><Skill /></TransitionWrapper>
-<TransitionWrapper><About /></TransitionWrapper>
-<TransitionWrapper><Projects /></TransitionWrapper>
-<TransitionWrapper><CTA /></TransitionWrapper>
-<TransitionWrapper><Footer /></TransitionWrapper>
-
+      <LangProvider>
+        <Hero />
+        <TransitionWrapper><Urutan /></TransitionWrapper>
+        <TransitionWrapper><Skill /></TransitionWrapper>
+        <TransitionWrapper><About /></TransitionWrapper>
+        <TransitionWrapper><Projects /></TransitionWrapper>
+        <TransitionWrapper><CTA /></TransitionWrapper>
+        <TransitionWrapper><Footer /></TransitionWrapper>
+      </LangProvider>
     </>
   );
 }

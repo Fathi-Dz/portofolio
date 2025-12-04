@@ -1,31 +1,36 @@
 import { motion } from "framer-motion";
 import projectData from "../../assets/data/project/project.json";
+import { useLang } from "../../Language/Language";
+
+// IMPORT GAMBAR DI SINI
+import project from "../../assets/asset/projects/project.jpg";
+import project1 from "../../assets/asset/projects/project1.jpg";
+
+// MAP FILE → VARIABLE
+const imgMap = {
+  "project.jpg": project,
+  "project1.jpg": project1
+};
 
 export default function ProjectSection() {
+  const { lang } = useLang();
+
   return (
     <section className="relative w-full bg-[var(--color-secondary)] py-20 px-6">
 
-      {/* LEFT SIDE TITLE */}
+      {/* LEFT TITLE */}
       <h1
         className="
-          absolute 
-          left-[-2vw] top-132
+          absolute left-[-2vw] top-132
           -translate-y-1/2 -translate-x-[40%]
           text-[16vw] md:text-[7vw]
-          font-bold
-          text-primary/10
-          rotate-90
-          whitespace-nowrap
-          pointer-events-none
-          select-none
-          tracking-widest
-          md:left-[-3vw]
-        
-          sm:left-[-10vw]
-          sm:text-[22vw]
+          font-bold text-primary/10
+          rotate-90 whitespace-nowrap
+          pointer-events-none select-none tracking-widest
+          md:left-[-3vw] sm:left-[-10vw] sm:text-[22vw]
         "
       >
-        PROJECTS
+        {lang === "id" ? "PROJEK" : "PROJECTS"}
       </h1>
 
       {/* LIST PROJECTS */}
@@ -37,13 +42,13 @@ export default function ProjectSection() {
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
-            className={`flex items-center gap-8 ${
-              p.side === "right" ? "flex-row-reverse" : ""
-            }`}
+            className={`flex items-center gap-8 ${p.side === "right" ? "flex-row-reverse" : ""}`}
           >
-            {/* IMAGE */}
+
+            {/* IMAGE (SUDAH FIX) */}
             <motion.img
-              src={p.img}
+              src={imgMap[p.img]}
+              alt={p.title[lang]}
               whileHover={{ scale: 1.05, rotateX: 10, rotateY: -10 }}
               transition={{ type: "spring", stiffness: 200, damping: 10 }}
               className="w-1/2 h-60 object-cover rounded-xl shadow-xl"
@@ -61,7 +66,7 @@ export default function ProjectSection() {
                 bg-clip-text text-transparent
               "
             >
-              {p.title}
+              {p.title[lang]}
             </motion.div>
           </motion.div>
         ))}

@@ -1,16 +1,21 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
-import emoji from "../../assets/asset/CTA/emoji.png";
 import { useLang } from "../../Language/Language";
+
+// IMPORT IMAGE MANUAL
+import emojiImg from "../../assets/asset/CTA/emoji.webp";
+
+// IMPORT DATA JSON
+import CTA from "../../assets/data/CTA/CTA.json";
 
 export default function ThankYouSection() {
   const ref = useRef(null);
   const isInView = useInView(ref, {
     margin: "-30% 0px -30% 0px",
-    once: false,
+    once: false
   });
 
-  const { lang } = useLang(); // GET LANGUAGE
+  const { lang } = useLang();
 
   return (
     <section
@@ -25,7 +30,7 @@ export default function ThankYouSection() {
       "
     >
 
-      {/* ===== BACKGROUND GLOW ===== */}
+      {/* BACKGROUND GLOW */}
       <div
         className="
           absolute top-1/2 left-1/2 
@@ -36,7 +41,7 @@ export default function ThankYouSection() {
         "
       />
 
-      {/* ===== SUPER BIG TITLE ===== */}
+      {/* TITLE */}
       <h1
         className="
           font-black leading-none
@@ -45,25 +50,20 @@ export default function ThankYouSection() {
           drop-shadow-[0_8px_20px_rgba(0,0,0,0.25)]
         "
       >
-        {lang === "id" ? "Terima Kasih!" : "Thank You!"}
+        {CTA.title[lang]}
       </h1>
 
-      {/* SMALL TEXT */}
+      {/* SUBTITLE */}
       <p className="mt-4 text-sm md:text-lg opacity-70 tracking-wider font-medium">
-        {lang === "id"
-          ? "hubungi saya untuk kerja sama dan kolaborasi"
-          : "contact me for work and collaborations"}
+        {CTA.subtitle[lang]}
       </p>
 
-      {/* ===== FLIPPING EMOJI ===== */}
+      {/* EMOJI */}
       <motion.img
-        src={emoji}
+        src={emojiImg}
         alt="emoji"
         animate={{ rotateY: isInView ? 0 : 180 }}
-        transition={{
-          duration: 0.9,
-          ease: "easeInOut",
-        }}
+        transition={{ duration: 0.9, ease: "easeInOut" }}
         className="
           w-[150px] sm:w-[180px] md:w-[220px] lg:w-[260px]
           mt-12 select-none
@@ -83,7 +83,7 @@ export default function ThankYouSection() {
           backdrop-blur-md font-normal font-poppins
         "
       >
-        {lang === "id" ? "hubungi saya" : "connect with me"}
+        {CTA.button[lang]}
       </motion.button>
 
     </section>

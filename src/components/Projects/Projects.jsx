@@ -3,8 +3,8 @@ import projectData from "../../assets/data/project/project.json";
 import { useLang } from "../../Language/Language";
 
 // IMPORT GAMBAR DI SINI
-import project from "../../assets/asset/projects/project.jpg";
-import project1 from "../../assets/asset/projects/project1.jpg";
+import project from "../../assets/asset/projects/project.webp";
+import project1 from "../../assets/asset/projects/project1.webp";
 
 // MAP FILE → VARIABLE
 const imgMap = {

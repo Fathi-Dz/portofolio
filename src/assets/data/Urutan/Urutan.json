@@ -1,0 +1,34 @@
+{
+  "title": {
+    "id": ["daftar", "isi"],
+    "en": ["table of", "contents"]
+  },
+
+  "items": [
+    {
+      "no": 1,
+      "id": "PENGANTAR",
+      "en": "INTRODUCTION"
+    },
+    {
+      "no": 2,
+      "id": "PENGALAMAN",
+      "en": "EXPERIENCE"
+    },
+    {
+      "no": 3,
+      "id": "KEAHLIAN",
+      "en": "SKILLS"
+    },
+    {
+      "no": 4,
+      "id": "PROYEK",
+      "en": "PROJECT"
+    },
+    {
+      "no": 5,
+      "id": "KONTAK",
+      "en": "CONTACT"
+    }
+  ]
+}

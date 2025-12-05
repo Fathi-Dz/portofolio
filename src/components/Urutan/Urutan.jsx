@@ -1,4 +1,5 @@
-import { useLang } from "../../Language/Language"; // <-- pakai bahasa
+import { useLang } from "../../Language/Language";
+import Urutan from "../../assets/data/urutan/Urutan.json";
 
 export default function TableOfContents() {
   const { lang } = useLang();
@@ -11,7 +12,7 @@ export default function TableOfContents() {
       }}
     >
 
-      {/* BIG TEXT TOP LEFT / RIGHT */}
+      {/* BIG TEXT FROM JSON */}
       <div
         className="
           absolute top-0
@@ -21,55 +22,31 @@ export default function TableOfContents() {
         "
       >
         <h1 className="text-[60px] sm:text-[80px] md:text-[120px] font-black -mb-4">
-          {lang === "id" ? "daftar" : "table of"}
+          {Urutan.title[lang][0]}
         </h1>
         <h1 className="text-[60px] sm:text-[80px] md:text-[120px] font-black">
-          {lang === "id" ? "isi" : "contents"}
+          {Urutan.title[lang][1]}
         </h1>
       </div>
 
-      {/* RIGHT BOTTOM MENU */}
+      {/* MENU LIST FROM JSON */}
       <div
         className="
           absolute bottom-10 right-10 md:right-20
           text-right font-bold text-[20px] md:text-[25px] tracking-wide
         "
       >
-        <div className="flex items-center justify-end mb-2">
-          <span className="mr-3">1</span>
-          <span className="text-right w-[200px]">
-            {lang === "id" ? "PENGANTAR" : "INTRODUCTION"}
-          </span>
-        </div>
-
-        <div className="flex items-center justify-end mb-2">
-          <span className="mr-3">2</span>
-          <span className="text-right w-[200px]">
-            {lang === "id" ? "PENGALAMAN" : "EXPERIENCE"}
-          </span>
-        </div>
-
-     <div className="flex items-center justify-end mb-2">
-  <span className="mr-3">3</span>
-  <span className="text-right w-[200px]">
-    {lang === "id" ? "KEAHLIAN" : "SKILLS"}
-  </span>
-</div>
-
-
-        <div className="flex items-center justify-end mb-2">
-          <span className="mr-3">4</span>
-          <span className="text-right w-[200px]">
-            {lang === "id" ? "PROYEK" : "PROJECT"}
-          </span>
-        </div>
-
-        <div className="flex items-center justify-end">
-          <span className="mr-3">5</span>
-          <span className="text-right w-[200px]">
-            {lang === "id" ? "KONTAK" : "CONTACT"}
-          </span>
-        </div>
+        {Urutan.items.map((item, i) => (
+          <div
+            key={i}
+            className="flex items-center justify-end mb-2"
+          >
+            <span className="mr-3">{item.no}</span>
+            <span className="text-right w-[200px]">
+              {item[lang]}
+            </span>
+          </div>
+        ))}
       </div>
 
     </section>

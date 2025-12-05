@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 import { motion, useMotionValue, useTransform } from "framer-motion";
 import gsap from "gsap";
-import imgHero from "../../assets/asset/Hero/hero.png";
+import imgHero from "../../assets/asset/Hero/hero.webp";
 import "../Hero/Hero.css";
 
 import { useLang } from "../../Language/Language"; // ⬅️ ambil hook bahasa
@@ -135,45 +135,50 @@ const Hero = () => {
   <button
     onClick={toggleLang}
     className="
-      relative flex items-center w-[90px] h-[38px] 
-      bg-white/15 backdrop-blur-xl rounded-full 
-      border border-white/30 shadow-[0_4px_20px_rgba(255,255,255,0.25)]
-      transition-all duration-500 hover:bg-white/25
+      relative flex items-center w-[100px] h-[42px]
+      bg-white/10 backdrop-blur-2xl rounded-full
+      border border-white/20
+      shadow-[0_8px_30px_rgba(255,255,255,0.15)]
+      transition-all duration-500
+      hover:bg-white/20 hover:shadow-[0_10px_35px_rgba(255,255,255,0.25)]
     "
   >
     {/* Sliding Ball */}
     <span
       className={`
-        absolute w-[42px] h-[32px] bg-white rounded-full 
-        shadow-[0_2px_12px_rgba(0,0,0,0.25)]
-        transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)]
-        ${lang === "id" ? "left-1" : "left-[47px]"}
+        absolute w-[46px] h-[36px]
+        bg-gradient-to-br from-white to-gray-200
+        rounded-full
+        shadow-[0_4px_15px_rgba(0,0,0,0.35)]
+        transition-all duration-500 ease-[cubic-bezier(0.25,1,0.5,1)]
+        ${lang === "id" ? "left-[4px]" : "left-[50px]"}
       `}
     />
 
-    {/* ID text */}
+    {/* ID */}
     <span
       className={`
-        w-1/2 text-center text-sm font-semibold 
+        w-1/2 text-center text-sm font-bold tracking-wide
         transition-all duration-300
-        ${lang === "id" ? "text-gray-900" : "text-white/70"}
+        ${lang === "id" ? "text-white" : "text-white/50"}
       `}
     >
       ID
     </span>
 
-    {/* EN text */}
+    {/* EN */}
     <span
       className={`
-        w-1/2 text-center text-sm font-semibold
+        w-1/2 text-center text-sm font-bold tracking-wide
         transition-all duration-300
-        ${lang === "en" ? "text-gray-900" : "text-white/70"}
+        ${lang === "en" ? "text-white" : "text-white/50"}
       `}
     >
       EN
     </span>
   </button>
 </div>
+
 
 
 
